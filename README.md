@@ -1,4 +1,4 @@
-# 🏠 Housing Price Prediction (Thane Real Estate Dataset)
+# 🏠 Housing Price Prediction (Real Estate Dataset)
 
 This project builds a **Machine Learning model** to predict **housing prices in Thane** based on features such as carpet area, floor, location, transaction type, facing, and more.
 It uses a real-estate dataset scraped from online property listings and includes extensive **data cleaning**, **feature engineering**, and **model training** using **Random Forest Regressor**.
@@ -124,4 +124,5 @@ Engineering (Computer Science – Computational & Data Science)
 ## ⭐ If you like this project
 
 Give the repo a **star ⭐** on GitHub!
+
 
