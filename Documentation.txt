@@ -1,0 +1,141 @@
+Housing Price Prediction — Project Documentation
+
+#1. Introduction
+
+This project aims to build a Machine Learning model that predicts housing prices in India. The dataset contains real-estate listing information such as carpet area, floor details, transaction type, location, and price indicators.
+
+The main focus is on:
+
+* Cleaning messy real-estate data
+* Extracting numerical information from text
+* Encoding categorical variables
+* Training and evaluating a regression model
+
+
+#2. Dataset Description 
+
+The dataset contains 21 columns, including:
+
+- Key Features  
+
+1. Amount(in rupees) : Total cost of the flat (e.g.,     “42 Lac”, “1.40 Cr”)         
+2. Price (in rupees) : Price per sq ft (numeric)                                  
+3. Carpet Area : Carpet area in sq.ft formatted as “500 sqft”                
+4. Floor : Shows current floor and total floors (e.g., “10 out of 11”) |
+5. Status : Ready to Move / Under Construction                          6. Transaction : Resale / New Property                                       7. location : Areas within Thane                                          8. Facing, Overlooking : Categorical attributes                                      9. Ownership : Freehold, Co-operative, etc.                                
+
+- Target Variable
+
+The prediction target is:
+
+Amount(in rupees) (Converted to numeric)
+
+#3. Data Preprocessing
+
+- 3.1 Convert Price Values (“Lac”, “Cr”) into Numeric
+
+Examples:
+
+* 42 Lac → 4,200,000
+* 1.4 Cr → 14,000,000
+
+A custom function was used to perform this conversion.
+
+- 3.2 Extract Carpet Area
+
+Carpet area text is cleaned:
+"500 sqft" → 500
+
+- 3.3 Extract Floor Information
+
+Split floor values into:
+
+* Floor Number
+* Total Floors
+
+Example:
+"10 out of 11" → Floor Number = 10, Total Floors = 11
+
+- 3.4 Handle Missing Values
+
+* Numeric columns → median filled
+* Categorical columns → label encoded after converting to string
+
+- 3.5 Drop High-Text Columns
+
+Columns like Title, Description, Society, Dimensions, Plot Area were removed as they require NLP for proper processing.
+
+#4. Model Development  
+
+- 4.1 Feature Matrix
+
+`X` contains all cleaned and encoded columns.
+
+- 4.2 Target Variable
+
+`y = Amount(in rupees)` (actual property price)
+
+- 4.3 Model Used
+
+Random Forest Regressor
+
+* Handles non-linear relationships
+* Works well with categorical encodings
+* Robust with missing and noisy data
+
+- 4.4 Train-Test Split
+
+test_size = 0.2  
+random_state = 42
+
+#5. Model Evaluation
+
+Metrics used:
+
+* RMSE (Root Mean Squared Error) — lower is better
+* R² Score — closer to 1.0 is better
+
+After training, the model is evaluated on unseen test data.
+
+Predictions are generated using:
+
+- python
+- model.predict(X_test.iloc[0:1])
+- Outputs are realistic property prices (Lacs/Crores).
+
+#6. Prediction Example
+
+Input features (sample from test set):
+python
+sample = X_test.iloc[0:1]
+prediction = model.predict(sample)
+Example output:
+array([13800000.])   # ₹1.38 Cr
+
+#7. Requirements
+
+pandas
+numpy
+scikit-learn
+matplotlib
+seaborn
+
+#8. Running the Project (Google Colab)
+
+1. Upload dataset
+2. Install requirements
+3. Run notebook:
+   * Load Data
+   * Clean & Transform
+   * Train Model
+   * Predict
+
+#9. Conclusion
+
+This project successfully:
+
+* Cleaned and transformed a complex real-estate dataset
+* Extracted useful numerical features
+* Applied label encoding on categorical attributes
+* Trained a Random Forest Regressor
+* Achieved realistic price predictions for Thane properties
